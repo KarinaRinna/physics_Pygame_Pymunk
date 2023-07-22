@@ -1,4 +1,5 @@
 import pygame as pg
+from random import randrange
 import pymunk.pygame_util
 pymunk.pygame_util.positive_y_is_up = False
 
@@ -28,6 +29,19 @@ segment_shape = pymunk.Segment(space.static_body, (0, HEGHT), (WIDTH, HEGHT), 20
 segment_shape.elasticity = 0.8
 segment_shape.friction = 0.5
 space.add(segment_shape)
+
+box_mass, box_size = 1, (60, 40)
+for x in range(120, WIDTH - 60, box_size[0]):
+    for y in range(HEGHT // 2, HEGHT - 20, box_size[1]):
+        box_moment = pymunk.moment_for_box(box_mass, box_size)
+        box_body = pymunk.Body(box_mass, box_moment)
+        box_body.position = x, y
+        box_shape = pymunk.Poly.create_box(box_body, box_size)
+        box_shape.elasticity = 0.1
+        box_shape.friction =1.0
+        box_shape.color = [randrange(256) for i in range(4)]
+        space.add(box_body, box_shape)
+
 
 while True:
     surface.fill(pg.Color('black'))
