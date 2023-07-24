@@ -48,7 +48,6 @@ def create_peg(x, y, space, color):
     circle_shape.friction = 0.5
     space.add(circle_shape)
 
-
 # pegs
 peg_y, step = y4, 60
 for i in range(10):
